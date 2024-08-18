@@ -14,7 +14,7 @@ const tracing = require("../lib/tracing")(
 // Import necessary dependencies
 const http = require("http"); // HTTP server functionality
 
-// const connectToMongoose = require("../lib/mongooseConnection"); // Function to connect to MongoDB
+const connectToMongoose = require("../lib/mongooseConnection"); // Function to connect to MongoDB
 // const connectToRedis = require("../lib/redisConnection"); // Function to connect to Redis
 
 // Prepare the Redis client to connect to later
@@ -36,4 +36,5 @@ server.on("listening", () => {
 });
 
 // Start the server
+connectToMongoose(config.mongodb.url);
 server.listen(0);
