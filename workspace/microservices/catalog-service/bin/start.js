@@ -36,5 +36,6 @@ server.on("listening", () => {
 });
 
 // Start the server
-connectToMongoose(config.mongodb.url);
-server.listen(0);
+connectToMongoose(config.mongodb.url).then(() => {
+  server.listen(0);
+});
