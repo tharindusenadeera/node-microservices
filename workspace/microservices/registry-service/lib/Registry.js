@@ -4,8 +4,12 @@ class Registry {
     this.timeout = 15;
   }
 
+  getKey(name, version, ip, port) {
+    return name + version + ip + port;
+  }
+
   register(name, version, ip, port) {
-    const key = name + version + ip + port;
+    const key = this.getKey(name, version, ip, port);
 
     if (!this.services[key]) {
       this.services[key] = {};
@@ -20,6 +24,12 @@ class Registry {
     }
     this.services[key].timestamp = Math.floor(new Date() / 1000);
     console.log(`Update service ${name}, ${version} at ${ip}:${port}`);
+    return key;
+  }
+
+  unregister(name, version, ip, port) {
+    const key = this.getKey(name, version, ip, port);
+    delete this.services[key];
     return key;
   }
 }
